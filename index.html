@@ -1,47 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Game Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Gaming | Premium Links & Tools</title>
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0b0e14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --cyan: #00f2ff;
+            --purple: #bc13fe;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial;
-            background: #111;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            background: rgba(11, 14, 20, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 10px var(--cyan);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(188, 19, 254, 0.15) 0%, rgba(11, 14, 20, 1) 70%);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        .hero p {
+            color: var(--text-dim);
+            max-width: 600px;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--cyan), var(--purple));
             color: white;
+            box-shadow: 0 4px 15px rgba(188, 19, 254, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 242, 255, 0.6);
+        }
+
+        /* --- GRID LAYOUTS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- CATEGORIES --- */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             text-align: center;
         }
-        .box {
-            background: #222;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
+
+        .cat-item {
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border-bottom: 3px solid var(--purple);
+            cursor: pointer;
+            transition: var(--transition);
         }
-        a {
-            color: #00ffcc;
+
+        .cat-item:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        /* --- INSTAGRAM SECTION --- */
+        .instagram-cta {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 100px 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 40px 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px 10% 20px;
+            background: #05070a;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
             text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.8rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            .hero p { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-<h1>🎮 My Game Hub</h1>
-<p>Best Game Links & Useful Websites</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">NEXUS OPS</div>
+        <div class="nav-links">
+            <a href="#games">Games</a>
+            <a href="#mods">Mods</a>
+            <a href="#tools">Tools</a>
+            <a href="#instagram">Follow</a>
+        </div>
+    </nav>
 
-<div class="box">
-    <h2>🔥 Popular Games</h2>
-    <p><a href="#">Download GTA Mods</a></p>
-    <p><a href="#">FIFA Mods</a></p>
-</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>LEVEL UP YOUR GAME</h1>
+        <p>Your ultimate hub for game downloads, custom mods, and essential tools for pro gamers. Curated for the community.</p>
+        <a href="#games" class="btn btn-primary">EXPLORE VAULT</a>
+    </section>
 
-<div class="box">
-    <h2>🌐 Useful Websites</h2>
-    <p><a href="#">Free Games Site</a></p>
-    <p><a href="#">Tools Website</a></p>
-</div>
+    <!-- Featured Games -->
+    <section class="container" id="games">
+        <h2 class="section-title">Featured Games</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" alt="Game 1">
+                <h3>Cyber Hunter X</h3>
+                <p>Open world survival with high-end graphics and mod support.</p>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">DOWNLOAD</a>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400" alt="Game 2">
+                <h3>Phantom Blade</h3>
+                <p>Fast-paced action RPG with unlocked frame rates for mobile.</p>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">DOWNLOAD</a>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400" alt="Game 3">
+                <h3>Nexus Racing</h3>
+                <p>The most realistic racing simulator now available for free.</p>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">DOWNLOAD</a>
+            </div>
+        </div>
+    </section>
 
-<div class="box">
-    <h2>📸 Follow Me</h2>
-    <p><a href="https://instagram.com/YOURUSERNAME">Instagram</a></p>
-</div>
+    <!-- Categories -->
+    <section class="container" style="background: rgba(255,255,255,0.02)">
+        <h2 class="section-title">Browse Categories</h2>
+        <div class="cat-grid">
+            <div class="cat-item"><h3>PC Games</h3></div>
+            <div class="cat-item"><h3>Mobile</h3></div>
+            <div class="cat-item"><h3>Game Mods</h3></div>
+            <div class="cat-item"><h3>Pro Tools</h3></div>
+        </div>
+    </section>
 
+    <!-- Useful Websites / Tools -->
+    <section class="container" id="tools">
+        <h2 class="section-title">Useful Gamer Tools</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>FPS Booster v2.1</h3>
+                <p>Optimization script to increase frame rates in competitive games.</p>
+                <a href="#" style="color: var(--cyan); text-decoration: none; font-weight: bold;">GET TOOL →</a>
+            </div>
+            <div class="card">
+                <h3>Ping Reducer</h3>
+                <p>The best DNS settings for lower latency in online matches.</p>
+                <a href="#" style="color: var(--cyan); text-decoration: none; font-weight: bold;">VIEW GUIDE →</a>
+            </div>
+            <div class="card">
+                <h3>Mod Manager</h3>
+                <p>One-click install for all the mods featured on our page.</p>
+                <a href="#" style="color: var(--cyan); text-decoration: none; font-weight: bold;">DOWNLOAD →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Follow -->
+    <section class="instagram-cta" id="instagram">
+        <h2 style="margin-bottom: 1rem;">Join the Community</h2>
+        <p style="margin-bottom: 2rem; color: #ddd;">Get daily updates on new mods and free games directly on your feed.</p>
+        <a href="https://instagram.com/yourusername" class="btn btn-primary" target="_blank">FOLLOW ON INSTAGRAM</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="margin-bottom: 1rem;">NEXUS OPS</div>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Contact</a>
+        </div>
+        <p style="color: var(--text-dim); font-size: 0.7rem;">&copy; 2026 Nexus Gaming Ops. All Rights Reserved. Not affiliated with any official game studio.</p>
+    </footer>
+
+    <script>
+        // Simple script for sticky nav background change on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '1rem 10%';
+                nav.style.background = 'rgba(5, 7, 10, 0.95)';
+            } else {
+                nav.style.padding = '1.5rem 10%';
+                nav.style.background = 'rgba(11, 14, 20, 0.9)';
+            }
+        });
+    </script>
 </body>
 </html>
